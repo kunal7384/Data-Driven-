@@ -47,7 +47,7 @@ public void teststs(String u , String p) throws InterruptedException
 	
 	driver.switchTo().alert().accept();
 	driver.switchTo().defaultContent();
-	System.out.println("valid login " + u   + p);
+	System.out.println("valid loginn " + u   + p);
 	Thread.sleep(2000);
 		
 		
