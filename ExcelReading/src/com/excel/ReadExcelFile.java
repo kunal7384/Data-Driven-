@@ -19,17 +19,74 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class ReadExcelFile {
+WebDriver driver;
+	
+@Test(dataProvider= "dataaa")
 
-	public String[][] getexceldata(String path ,String ss)
+public void teststs(String u , String p) throws InterruptedException
+ {
+	driver = new ChromeDriver();
+	
+	driver.get("http://demo.guru99.com/V4/");
+	
+	driver.findElement(By.name("uid")).sendKeys(u);
+	
+	driver.findElement(By.name("password")).sendKeys(p);
+	
+	if(isAlertisPresent()==true)
+	{
+		
+	driver.switchTo().alert().accept();
+	driver.switchTo().defaultContent();
+	System.out.println("Invalid login " + u   + p);
+	}
+	else
+	{
+		
+	driver.findElement(By.xpath("//a[contains(text(),'Log out')]")).click();
+	
+	driver.switchTo().alert().accept();
+	driver.switchTo().defaultContent();
+	System.out.println("valid login " + u   + p);
+	Thread.sleep(2000);
+		
+		
+	}
+		
+		
+	}
+	
+	
+ 
+
+
+public boolean isAlertisPresent()
+{
+	
+	try {
+		
+	driver.switchTo().alert();
+	return true;
+		
+	}catch (NoAlertPresentException e) {
+		return false;
+	}
+	
+	
+	
+}
+	
+	@DataProvider(name="dataaa")
+	public String[][] getexceldata()
 	{
 		
 		System.out.println("Welcome");
 		try
 		{
 			
-		String data[][] = null;	
 		
-	File file = new File(path);	
+		
+	File file = new File("C:\\Users\\dkunal\\Desktop\\test.xls");	
 	FileInputStream fis = new FileInputStream(file)	;
 //	XSSFWorkbook wb = new XSSFWorkbook(fis);
 	
@@ -37,11 +94,11 @@ public class ReadExcelFile {
 	 org.apache.poi.ss.usermodel.Workbook wb = WorkbookFactory.create(fis);
 //	XSSFSheet st = wb.getSheetAt(0);
 	 
-	 org.apache.poi.ss.usermodel.Sheet st = wb.getSheet(ss);
+	 org.apache.poi.ss.usermodel.Sheet st = wb.getSheetAt(0);
 	int row =  st.getLastRowNum()+1;
 	int col = st.getRow(0).getLastCellNum();
 	
-	data = new String[row-1][col];
+	String[][] data = new String[row-1][col];
 	  
 		Iterator<Row> rowiterator = st.iterator();
 		int i=0;
@@ -112,17 +169,18 @@ public class ReadExcelFile {
 	    }  
 		
 		catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		return null;
+	
+	
 		
-	}
-	public static void main(String[] args) {
 		
-		String path= "C:\\Users\\dkunal\\Desktop\\test.xls";
-		ReadExcelFile r = new ReadExcelFile();
-		r.getexceldata(path, "Sheet1");
+	
 		
+	
+	
+	
 	}
 	}
 

@@ -5,7 +5,7 @@
     <classes>
       <class name="com.excel.ReadExcelFile">
         <methods>
-          <include name="test" invocation-numbers="0 1 2 3 4 5 6 7"/>
+          <include name="teststs" invocation-numbers="0 1 2 3 4 5 6 7"/>
         </methods>
       </class> <!-- com.excel.ReadExcelFile -->
     </classes>
